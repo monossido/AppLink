@@ -20,6 +20,18 @@ AppLink is free software: you can redistribute it and/or modify
 
 AppLink allows you to open some link to the most popular social network directly in the official Android application instead of open the browser.
 
+For some features it's possible that the Super user (aka root) permission is required. That's because some Activitys are "private" and they are impossible to be launched by another application, so i use "am start" from shell.
+
+-----------------------------------------------------------------------------------------
+
+- Do you want to help?
+  At the moment there are two problems to solve:
+	1) Compatibility with more link/social network as possible. Let me know which.
+	2) Reverse enginering with the offial (proprietary) application for Android (the more difficult app is Facebook for Android).
+	   The reverse enginering is necessary to find the name of the right Activity to launch and the extra key nedded to pass.
+
+Send me an email if you want to collaborate.
+
 -----------------------------------------------------------------------------------------
 
 Changelog
@@ -31,4 +43,4 @@ User link -> User profile
 Facebook:
 User link -> User profile
 Post link -> User Profile
-Message link -> List of messages
+Message link -> List of messages (root needed)
