@@ -36,10 +36,12 @@ import org.xml.sax.SAXException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,7 +59,7 @@ public class Facebook extends Activity {
         
         context=this;
                 
-        String url = getIntent().getData().toString();
+        final String url = getIntent().getData().toString();
 
         if(url.contains("posts") || url.contains("profile.php") || (!url.contains("&") && !url.contains("=") && url.length()>24))
         	//1)Posts->It is impossible to launch FeedbackActivity because of permission denied.
@@ -77,6 +79,18 @@ public class Facebook extends Activity {
                 public void onCancel(DialogInterface dialog) {
         	      finish();
                 }});
+        	builder.setPositiveButton("Open in Browser", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                	Intent i = new Intent();
+                	i.setAction("android.intent.action.VIEW"); 
+                	i.addCategory("android.intent.category.BROWSABLE");
+                	i.setComponent(new ComponentName("com.android.browser", "com.android.browser.BrowserActivity"));
+                	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                	i.setData(Uri.parse(url));
+                	startActivity(i);
+                	finish();
+                }
+            });
         	AlertDialog alert = builder.create();
         	alert.show();
         }
