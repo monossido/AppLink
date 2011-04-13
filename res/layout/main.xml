@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-	android:id="@+id/Hello"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    />
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="fill_parent" android:layout_height="fill_parent">
+ 
+<ImageView android:layout_marginRight="5dp" android:layout_marginTop="7dp" android:id="@+id/IconView01"
+ android:layout_width="wrap_content" android:layout_height="wrap_content"
+ android:src="@drawable/icon" android:layout_alignParentRight="true"/>
+ 
+  <TextView android:layout_marginLeft="5dp" android:text="AppLink" android:id="@+id/Name"
+android:layout_marginTop="10dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+  
+ <TextView android:layout_marginLeft="5dp" android:text="@string/version" android:id="@+id/Text" android:layout_below="@+id/Name"
+android:layout_marginTop="10dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+ 
+  <TextView android:id="@+id/infoapplink" android:layout_marginLeft="5dp" android:text="@string/infoapplink" android:layout_below="@+id/Text"
+ android:layout_width="wrap_content" android:layout_height="wrap_content" />
+ 
+   <TextView android:layout_marginLeft="5dp" android:layout_marginTop="10dp" android:id="@+id/mail" android:text="@string/info" android:layout_below="@+id/infoapplink"
+ android:layout_width="wrap_content" android:layout_height="wrap_content" />
+ 
+ <ScrollView android:id="@+id/ScrollView" android:layout_marginTop="10dip"
+ android:layout_width="wrap_content" android:layout_below="@+id/mail"
+ android:layout_height="fill_parent">
+ <RelativeLayout
+ android:layout_width="wrap_content" android:layout_height="wrap_content">
+ <TextView android:layout_marginLeft="5dp" android:text="@string/changelog"
+ android:layout_width="wrap_content" android:layout_height="wrap_content" />
+ </RelativeLayout>
+ </ScrollView>
+ 
+</RelativeLayout>

@@ -50,7 +50,6 @@ public class Twitter extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
                 
         final String url = getIntent().getData().toString();
 

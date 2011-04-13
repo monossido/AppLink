@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Main!</string>
+    <string name="version">0.1</string>
     <string name="app_name">AppLink</string>
+    <string name="infoapplink">AppLink allows you to open some link to the most popular social network directly in the official Android application instead of open the browser.\nFor some features it\'s possible that the Super user (aka root) permission is required.\nIn order to use the application you have to open a link to one of the supported social network.</string>
+	<string name="changelog"><b>Changelog\nv0.1</b>\n-Initial release\n<b>Twitter</b>:\nUser link -> User profile\n<b>Facebook</b>:\nUser link -> User profile\nPost link -> User Profile\nMessage link -> List of messages (root needed)\nEvent -> Event (root needed)</string>
+	<string name="info">For suggestions or ideas or if you want to collaborate send an email monossido@lorenzobraghetto.com, sources available at https://github.com/monossido/AppLink
+	</string>
 </resources>
