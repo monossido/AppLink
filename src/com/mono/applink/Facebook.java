@@ -71,6 +71,9 @@ public class Facebook extends Activity {
         }else if(url.contains("sk=inbox"))//Message
         {
         	new FacebookMessage().execute();
+        }else if(url.contains("event.php"))//Message
+        {
+        	new FacebookEvent().execute();
         }else
         {
         	AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -109,13 +112,10 @@ public class Facebook extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 			//String tid = getIntent().getData().toString().replaceAll("^.*tid=", ""); //tid in facebook application != tid via web
-		
             String commands = "am start -a android.intent.action.MAIN -a android.intent.action.VIEW -n com.facebook.katana/.activity.messages.MailboxTabHostActivity";
-
 	        return commands;
-			
 		} 
-				
+		
         @Override 
 		protected void onPostExecute(String commands)
 		{ 
@@ -126,7 +126,6 @@ public class Facebook extends Activity {
                DataOutputStream os = new DataOutputStream(p.getOutputStream());   
                os.writeBytes(commands);   
                os.flush();
-  
             } catch (IOException e) {   
                // TODO Auto-generated catch block   
                e.printStackTrace();   
@@ -139,6 +138,47 @@ public class Facebook extends Activity {
 			}
            	dialog.cancel();
            	android.os.Process.killProcess(android.os.Process.myPid());
+		}
+}
+    
+    private class FacebookEvent extends AsyncTask<String, String, String> {
+		
+		ProgressDialog dialog;
+		
+        @Override 
+        protected void onPreExecute() {
+        	dialog = ProgressDialog.show(Facebook.this, "", 
+                    "Loading. Please wait...", true);
+        }
+
+		@Override
+		protected String doInBackground(String... params) {
+			String eid = getIntent().getData().toString().replaceAll("^.*eid=", "").replaceAll("&.*$", ""); //tid in facebook application != tid via web
+            String commands = "am start -a android.intent.action.MAIN -a android.intent.action.VIEW -n com.facebook.katana/.activity.events.EventDetailsActivity -d content://com.facebook.katana.provider.EventsProvider/events/eid/"+eid;
+			return commands;
+		} 
+		
+        @Override 
+		protected void onPostExecute(String commands)
+		{ 
+        	Process p;   
+            try {   
+               p = Runtime.getRuntime().exec("su");//it is impossible to launch EventDetailsActivity because of permission denied unless you have root permission
+               DataOutputStream os = new DataOutputStream(p.getOutputStream());   
+               os.writeBytes(commands);   
+               os.flush();
+            } catch (IOException e) {   
+               // TODO Auto-generated catch block   
+               e.printStackTrace();   
+            }  
+            try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+           	dialog.cancel();
+           	android.os.Process.killProcess(android.os.Process.myPid());        	
 		}
 }
 		
