@@ -36,7 +36,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
@@ -97,7 +96,7 @@ public class Twitter extends Activity {
         	String user = getIntent().getData().toString().replace("://twitter.com/", "").replace("https","").replace("http","").replaceAll("/.*$", "").replaceAll("\\?.*$", "");
 			        	
 	        HttpGet HttpGet = new HttpGet("http://api.twitter.com/1/users/show/"+user+".xml");
-			HttpResponse response = Facebook.simpleHttp(HttpGet, getBaseContext());
+			HttpResponse response = simpleHttp(HttpGet);
 		    Element root = Facebook.simpleParser(response);
 		    
 		    NodeList ids = root.getElementsByTagName("id");
@@ -144,7 +143,7 @@ public class Twitter extends Activity {
 		return root;		
 	}
 	
-	public static HttpResponse simpleHttp(HttpGet HttpGet, Context contexts)
+	public static HttpResponse simpleHttp(HttpGet HttpGet)
 	{
         HttpResponse response=null;
         DefaultHttpClient client = new DefaultHttpClient();

@@ -44,7 +44,6 @@ import android.content.DialogInterface.OnCancelListener;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 
 public class Facebook extends Activity {
@@ -70,7 +69,7 @@ public class Facebook extends Activity {
         }else if(url.contains("sk=inbox"))//Message
         {
         	new FacebookMessage().execute();
-        }else if(url.contains("event.php"))//Message
+        }else if(url.contains("event.php"))//event
         {
         	new FacebookEvent().execute();
         }else
@@ -199,14 +198,13 @@ public class Facebook extends Activity {
 				String getIntent=getIntent().getData().toString();
 				if(getIntent.contains("&id=") || getIntent.contains("?id="))
 				{
-					user = getIntent().getData().toString().replaceFirst("^.*&id=", "").replaceFirst("^.*\\?id=", "").replaceAll("&.*$","");
-					Log.v("APPLINK","user="+user);
+					user = getIntent.replaceFirst("^.*&id=", "").replaceFirst("^.*\\?id=", "").replaceAll("&.*$","");
 				    id = Long.parseLong(user);
 				}else
 				{
 					user = getIntent.replaceFirst("^.*/", "").replaceAll("^.*\\?", "").replaceAll("%2F.*$","");
 					HttpGet HttpGet = new HttpGet("https://api.facebook.com/method/fql.query?query=select%20uid%20from%20user%20where%20username=%22"+user+"%22&format=xml");
-					HttpResponse response = Facebook.simpleHttp(HttpGet, getBaseContext());
+					HttpResponse response = Facebook.simpleHttp(HttpGet);
 				    Element root = Facebook.simpleParser(response);
 				    
 				    NodeList ids = root.getElementsByTagName("uid");
@@ -254,7 +252,7 @@ public class Facebook extends Activity {
 		return root;		
 	}
 	
-	public static HttpResponse simpleHttp(HttpGet HttpGet, Context contexts)
+	public static HttpResponse simpleHttp(HttpGet HttpGet)
 	{
         HttpResponse response=null;
 
