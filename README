@@ -30,12 +30,18 @@ For some features it's possible that the Super user (aka root) permission is req
 	2) Reverse enginering with the offial (proprietary) application for Android (the more difficult app is Facebook for Android).
 	   The reverse enginering is necessary to find the name of the right Activity to launch and the extra key nedded to pass.
 	3) A decent icon :)
+	4) Conversion from foursquare username to foursquare user_id (foursquare's api expert needed)
 
 Send me an email if you want to collaborate.
 
 -----------------------------------------------------------------------------------------
 
 Changelog
+
+0.2 Foursquare support started
+Foursquare:
+User link (with id) -> User profile
+Venue link -> Venue
 
 0.1 Initial release
 Twitter:
